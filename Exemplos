@@ -1,0 +1,111 @@
+# Cliente ___ CADASTRO
+
+cliente_username = ['pedro','jose']
+cliente_cpf = [123, 456]
+cliente_senha = [000,001]
+cliente_email = ['pedro@gmail','jose@gmail']
+cliente_limitecredito = [100,1000]
+
+# Carrinho
+carrinho_total = [7.00,0]
+carrinho_itens = [[1,0,0,5],[0,0,0,0]] # atualizar com o número de produtos, ou seja comprou 0 pasta de dentes...
+#####
+#carrinho_itens[0]-->[1,0,0,1]
+#carrinho_itens[1]-->[0,0,0,0]
+#print(carrinho_itens[0][3])->5
+
+# Produtos - pode adicionar quantos produtos desejar
+produtos_nome = ['Pasta de dente', 'Arroz 5 kg', 'Feijão 1 kg', 'Açucar 1 kg']
+produtos_preco = [5.00, 10.00, 4.00, 2.00]
+
+
+
+
+# __________________________
+
+
+#cadastro de novos clientes
+#verificar se o cliente já existe a partir do cpf
+def cadastro():
+  cpf=input("Digite o cpf: ")
+  if not cpf in cliente_cpf:
+    cliente_username.append(input("Digite o nome do usuário: "))
+    cliente_cpf.append(cpf)
+    # cliente_senha.append(input("Digite a senha: "))
+    # cliente_email.append(input("Digite o email: "))
+    cliente_limitecredito.append(1000.00)
+    
+    return len(cliente_cpf)-1
+  else:    
+    for index in range(len(cliente_cpf)):
+      if cliente_cpf[index]==cpf:
+        print("Cliente já cadastrado com o nome de: ", cliente_username[index])
+        return index
+    #index = cliente_cpf.index(cpf)
+
+#mostra um cliente a partir do cpf
+def consulta_cliente():
+  #for i in cliente_username:
+  print("Qual o cpf que deseja consultar? ")
+  cpf=input("Digite o cpf: ")
+  if cpf in cliente_cpf:
+    index=cliente_cpf.index(cpf)
+    print(cliente_username[index])
+
+#
+def comprar(cpf, senha):
+  print("implementar com o cpf e a senha", cpf, " ", senha)
+
+  
+  
+  # ___________________
+ 
+ 
+ #menu principal
+
+index=0
+def menu():
+    opcao = "-1"
+
+    while opcao != "0":
+        print("""Menu:
+1 - Cadastro
+2 - Comprar
+3 - Mostrar carrinho
+4 - Pagar conta
+5 - Consultar cliente
+6 - Mostrar produtos
+0 - Sair""")
+        opcao = input()
+
+        if opcao == "1":
+            print("Opção selecionada: Cadastro")
+            index=cadastro()
+
+        elif opcao == "2":
+            print("Opção selecionada: Comprar") 
+            cpf=input("Digite  o cpf: ")  
+            senha= input("Digite  a senha: ")  
+            comprar(cpf,senha)
+
+        elif opcao == "3":
+            print("Opção selecionada: Mostrar carrinho")
+
+        elif opcao == "4":
+            print("Opção selecionada: Pagar conta")
+
+        elif opcao == "5":
+            print("Opção selecionada: Consultar cliente")            
+            consulta_cliente()
+
+        elif opcao == "6":
+            print("Opção selecionada: Mostrar produtos na prateleira")            
+            mostra_produtos()
+
+        elif opcao == "0":
+            print("Saindo...")
+            
+        else:
+            print("Opção inválida! Tente novamente.")
+
+menu()

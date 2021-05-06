@@ -5,14 +5,17 @@ Você foi contratado(a) para criar um sistema que simule as operações de uma l
 Nas próximas seções são descritas as informações necessárias para a implementação do sistema.
 Tarefas
 
-O objetivo de seu programa é possibilitar que clientes façam o seu cadastro, insiram itens em um carrinho de compras, visualizem o total de gastos e a lista de itens adicionados ao carrinho, consultar cliente, bem com possam realizar o pagamento.
+O objetivo de seu programa é possibilitar que clientes façam o seu cadastro, insiram itens em um carrinho de compras, 
+visualizem o total de gastos e a lista de itens adicionados ao carrinho, consultar cliente, bem com possam realizar o pagamento.
 1 - Cadastrar novos clientes
 
 O cliente poderá criar um novo usuário informando os seguintes dados cadastrais:
 
-    Nome de usuário: o nome de usuário do titular da conta. É constituído por um conjunto de caracteres alfabéticos (ex: João, Maria, Francisco). Deve-se verificar se o usuário já existe no sistema (via cpf), pois não são permitidos cadastros em duplicidade;
+    Nome de usuário: o nome de usuário do titular da conta. É constituído por um conjunto de caracteres alfabéticos (ex: João, Maria, Francisco). 
+    Deve-se verificar se o usuário já existe no sistema (via cpf), pois não são permitidos cadastros em duplicidade;
 
-    CPF: deve ser verificado se o número de CPF informado já existe no sistema e se o mesmo é válido (mais informações podem ser encontrada no site http://www.macoratti.net/alg_cpf.htm);
+    CPF: deve ser verificado se o número de CPF informado já existe no sistema e se o mesmo é válido (mais informações podem ser encontrada no 
+    site http://www.macoratti.net/alg_cpf.htm);
 
     Senha: necessária para realizar qualquer operação. É constituída de 6 dígitos;
 
@@ -20,7 +23,9 @@ O cliente poderá criar um novo usuário informando os seguintes dados cadastrai
 
 2 - Compras
 
-Cada usuário pode realizar compras até que seu limite de crédito seja atingido. O limite de crédito será de R$ 1.000,00 para cada cliente. Quando o limite estourar, deve ser mostrada uma mensagem para o usuário informando que ele não pode inserir novos itens ao seu carrinho, a menos que realize o pagamento.
+Cada usuário pode realizar compras até que seu limite de crédito seja atingido. O limite de crédito será de R$ 1.000,00 para cada cliente. 
+Quando o limite estourar, deve ser mostrada uma mensagem para o usuário informando que ele não pode inserir novos itens ao seu carrinho,
+a menos que realize o pagamento.
 
 O sistema terá um cadastro fixo dos itens que poderão ser comprados. Por exemplo:
 
@@ -34,10 +39,12 @@ O sistema terá um cadastro fixo dos itens que poderão ser comprados. Por exemp
 
 20 - Açúcar 1 kg - R$ 2,00
 
-Assim, o usuário irá escolher o produto digitando seu código (“1” ou “2” ... “20”). Também deve ser informada a quantidade desejada de cada produto. Os itens escolhidos devem ser registrados no carrinho.
+Assim, o usuário irá escolher o produto digitando seu código (“1” ou “2” ... “20”). Também deve ser informada a quantidade desejada 
+de cada produto. Os itens escolhidos devem ser registrados no carrinho.
 3 - Mostrar carrinho
 
-O usuário poderá ter acesso ao seu carrinho de compras para verificar seu total de gastos. A função deverá disponibilizar o total do carrinho e a opção para listar todos os itens.
+O usuário poderá ter acesso ao seu carrinho de compras para verificar seu total de gastos. A função deverá disponibilizar o total do 
+carrinho e a opção para listar todos os itens.
 4 - Pagar conta
 
 O usuário poderá fazer o pagamento “virtual” de sua fatura para finalizar sua compra. Ou seja o carrinho será esvaziado e o saldo total liberado.

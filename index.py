@@ -1,6 +1,19 @@
 #menu principal
-
 index=0
+#casdatro=1
+
+#CADASTRO DE CLIENTES
+cliente_username = []
+cliente_cpf = []
+cliente_senha = []
+cliente_email = []
+cliente_limitecredito = []
+
+# Lista de produtos
+produtos_carrinho = []
+produtos_total = [{'Pasta de dente': '500.00'}, {'Arroz 5 kg': '100.00'}, {'Feijão 1 kg': '500.00'}, {'Açucar 1 kg': '50.00'}]
+
+
 def menu():
     opcao = "-1"
 
@@ -17,46 +30,32 @@ def menu():
 
         if opcao == "1":
             print("Opção selecionada: Cadastro")
-            index=cadastro()
-#CADASTRO DE CLIENTES
+            
+#cadastro de novos clientes
 
-#cliente_username = []
-#cliente_cpf = []
-#cliente_senha = []
-#cliente_email = []
-#cliente_limitecredito = []
+            cpf = input("Digite seu CPF: ")
+            if not cpf in cliente_cpf:
 
-#dados_cliente = [cliente_username, cliente_cpf, cliente_senha, cliente_email, cliente_limitecredito]
-#while True:
+                cliente_cpf.append(cpf)
+                nome = input("Digite seu Nome: ")
+                cliente_username.append(nome)
+                senha = input("Digite sua senha: ")
+                cliente_senha.append(senha)
+                email = input("Digite seu email: ")
+                cliente_email.append(email)
+                cliente_limitecredito.append(1000.00) 
+                print ("Parabéns, Cadastro concluido com sucesso!")
 
-   # nome = input("Digite seu nome: ")
-  #  cliente_username.append(nome)
+#verificar se o cliente já existe a partir do cpf
+            else:    
+                for cpf in cliente_cpf:
+                        print("Cliente já cadastrado com o nome de: ", cliente_username)
 
-    #cpf = input("Digite seu CPF: ")
-    #if cpf in cliente_cpf:
-     #   print ("Cliente já cadastrado")
-      #  break
-    #else:
-    #    cliente_cpf.append(cpf)
-
-    #senha = input("Digite sua senha: ")
-    #cliente_senha.append(senha)
-    #email = input("Digite seu email: ")
-    #cliente_email.append(email)
-    #limitecredito = input("Digite seu limite de crédito: ")
-    #cliente_limitecredito.append(limitecredito) 
-    #print ("Parabéns, Cadastro concluido com sucesso!")
-    
-
-#print (dados_cliente)
-
-# Lista de Produtos
 
         elif opcao == "2":
-            print("Opção selecionada: Comprar") 
-            cpf=input("Digite  o cpf: ")  
-            senha= input("Digite  a senha: ")  
-            comprar(cpf,senha)
+            print("Opção selecionada: Comprar")
+
+#print (produtos_nome)
 
         elif opcao == "3":
             print("Opção selecionada: Mostrar carrinho")
@@ -64,13 +63,29 @@ def menu():
         elif opcao == "4":
             print("Opção selecionada: Pagar conta")
 
+#Confirmação de compra
+            cpf=input("Digite  o cpf: ")
+            if cpf in cliente_cpf:
+                
+                senha = input("Digite  a senha: ")
+                if senha in cliente_senha:
+                    print ("Pagamento efutado com sucesso!")
+                    cliente_limitecredito.clear()
+                    
+                else:
+                        print ("Senha incorreta.")
+
+#Verificação de CPF
+            if not cpf in cliente_cpf:
+                    print("CPF incorreto.")
+
         elif opcao == "5":
             print("Opção selecionada: Consultar cliente")            
             consulta_cliente()
 
         elif opcao == "6":
             print("Opção selecionada: Mostrar produtos na prateleira")            
-            mostra_produtos()
+            print (type(produtos_total))
 
         elif opcao == "0":
             print("Saindo...")

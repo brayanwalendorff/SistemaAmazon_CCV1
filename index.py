@@ -81,7 +81,7 @@ def menu():
 5 - Consultar cliente
 6 - Mostrar produtos
 0 - Sair""")
-        opcao = input()
+        opcao = input("\nSelecione uma opção: ")
 
         #cadastro de novos clientes
         if opcao == "1":
@@ -129,7 +129,7 @@ def menu():
             #print (type(produtos_total))
 
         elif opcao == "0":
-            print("Saindo...")
+            print("Bye...")
             
         else:
             print("Opção inválida! Tente novamente. \n")

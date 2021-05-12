@@ -36,25 +36,38 @@ def cpf_validate(numbers):
             return False
     return True
 
-def cadastro ():
-    
+def cadastro (cpf):
+    #Caso o cliente não esteja cadastrado solicita os dados e armazena
     if not cpf in cliente_cpf:
-        
+        cliente_cpf.append(cpf)
         nome = input("Digite seu Nome: ")
         cliente_username.append(nome)
-        senha = input("Digite sua senha: ")
-        cliente_senha.append(senha)
+
+        #inicia uma verificação de senha de 6 digitos
+        while True:
+            senha = input("Digite sua senha: ")
+            tamanho_senha = len(list(senha))
+            if tamanho_senha == 6:
+                cliente_senha.append(senha)
+                break
+            else:
+                print("Senha não corresponde aos requisitos \n")
+
         email = input("Digite seu email: ")
         cliente_email.append(email)
         cliente_limitecredito.append(1000.00) 
         
         print ("Parabéns, Cadastro concluido com sucesso! \n")
+        return True
 
 #verificar se o cliente já existe a partir do cpf
     else:    
         for cpf in cliente_cpf:
             print("Cliente já cadastrado com o nome de: ", cliente_username)
         return True
+        
+#Verificando o parametro senhas
+
 
 def menu():
     opcao = "-1"
@@ -77,15 +90,13 @@ def menu():
             #Verificar CPF se é valido ou não
             if cpf_validate(cpf):
                 print('CPF válido.')
-                cliente_cpf.append(cpf)
                 cadastro(cpf)
             else:
                 print('CPF inválido.')
         
         elif opcao == "2":
             print("Opção selecionada: Comprar \n")
-
-#print (produtos_nome)
+            #print (produtos_nome)
 
         elif opcao == "3":
             print("Opção selecionada: Mostrar carrinho \n")
@@ -93,7 +104,7 @@ def menu():
         elif opcao == "4":
             print("Opção selecionada: Pagar conta \n")
 
-#Confirmação de compra
+            #Confirmação de compra
             cpf=input("Digite  o cpf: ")
             if cpf in cliente_cpf:
                 
@@ -105,7 +116,7 @@ def menu():
                 else:
                         print ("Senha incorreta. \n")
 
-#Verificação de CPF
+            #Verificação de CPF
             if not cpf in cliente_cpf:
                     print("CPF incorreto.")
 

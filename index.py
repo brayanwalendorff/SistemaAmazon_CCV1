@@ -1,18 +1,23 @@
+import os
+import time
 
 index = 0
 #CADASTRO DE CLIENTES
 cliente_username = []
 cliente_cpf = []
 cliente_senha = []
-cliente_email = []
+cliente_email = [] 
 cliente_limitecredito = []
 
 # Lista de produtos
-#produtos_carrinho = []
-#produtos_total = [{'Pasta de dente': '500.00'}, {'Arroz 5 kg': '100.00'}, {'Feijão 1 kg': '500.00'}, {'Açucar 1 kg': '50.00'}]
-#produtos_nome = ['Pasta de dente', 'Arroz 5 kg', 'Feijão 1 kg', 'Açucar 1 kg']
-#produtos_preco = [5.00, 10.00, 4.00, 2.00]
-#print (produtos_nome)
+produtos_carrinho = []
+produtos_total = [{'Pasta de dente': '500.00'}, {'Arroz 5 kg': '100.00'}, {'Feijão 1 kg': '500.00'}, {'Açucar 1 kg': '50.00'}]
+produtos_nome = ['Pasta de dente', 'Arroz 5 kg', 'Feijão 1 kg', 'Açucar 1 kg']
+produtos_preco = [5.00, 10.00, 4.00, 2.00]
+
+
+total_carrinho = []
+
 
 def cpf_validate(numbers):
     #  Obtém os números do CPF e ignora outros caracteres
@@ -40,30 +45,32 @@ def cadastro (cpf):
     #Caso o cliente não esteja cadastrado solicita os dados e armazena
     if not cpf in cliente_cpf:
         cliente_cpf.append(cpf)
-        nome = input("Digite seu Nome: ")
+        time.sleep(3)
+        os.system('cls')
+        nome = input("\n Digite seu Nome: ")
         cliente_username.append(nome)
 
         #inicia uma verificação de senha de 6 digitos
         while True:
-            senha = input("Digite sua senha: ")
+            senha = input("\n Digite sua senha: ")
             tamanho_senha = len(list(senha))
             if tamanho_senha == 6:
                 cliente_senha.append(senha)
                 break
             else:
-                print("Senha não corresponde aos requisitos \n")
+                print("\n Senha não corresponde aos requisitos \n")
 
-        email = input("Digite seu email: ")
+        email = input("\n Digite seu email: ")
         cliente_email.append(email)
         cliente_limitecredito.append(1000.00) 
         
-        print ("Parabéns, Cadastro concluido com sucesso! \n")
+        print ("\n Parabéns, Cadastro concluido com sucesso! \n")
         return True
 
 #verificar se o cliente já existe a partir do cpf
     else:    
         for cpf in cliente_cpf:
-            print("Cliente já cadastrado com o nome de: ", cliente_username)
+            print("\n Cliente já cadastrado com o nome de: ", cliente_username)
         return True
         
 #Verificando o parametro senhas
@@ -73,65 +80,105 @@ def menu():
     opcao = "-1"
 
     while opcao != "0":
-        print("""Menu: \n
-1 - Cadastro
-2 - Comprar
-3 - Mostrar carrinho
-4 - Pagar conta
-5 - Consultar cliente
-6 - Mostrar produtos
-0 - Sair""")
-        opcao = input("\nSelecione uma opção: ")
+        print('''\n Menu: \n
+ 1 - Cadastro
+ 2 - Comprar
+ 3 - Mostrar carrinho
+ 4 - Pagar conta
+ 5 - Consultar cliente
+ 6 - Mostrar produtos
+ 0 - Sair''')
+        opcao = input("\n Selecione uma opção: ")
 
         #cadastro de novos clientes
         if opcao == "1":
-            print("Opção selecionada: Cadastro \n")
-            cpf = input("Digite seu CPF: ")
+            os.system('cls')
+            print("\n Opção selecionada: Cadastro \n")
+            cpf = input(" Digite seu CPF: ")
             #Verificar CPF se é valido ou não
             if cpf_validate(cpf):
-                print('CPF válido.')
+                print('\n CPF válido.')
                 cadastro(cpf)
+                time.sleep(3)
+                os.system('cls')
             else:
-                print('CPF inválido.')
-        
+                print('\n CPF inválido.')
+                time.sleep(3)
+                os.system('cls')
+                
         elif opcao == "2":
-            print("Opção selecionada: Comprar \n")
-            #print (produtos_nome)
+            os.system('cls')
+            print("\n Opção selecionada: Comprar \n")
+            print(''' Lista de produtos disponíveis:\n
+ 1 - Pasta de Dente --- R$ 5,00
+ 2 - Arroz 5kg -------- R$ 10,00
+ 3 - Feijão 1kg ------- R$ 4,00
+ 4 - Açucar 1kg ------- R$ 2,00
+            ''')
+            listacompra = int(input('\n Digite o número do produto desejado: '))
+            if listacompra > 0 and listacompra <=4:
 
+                
+            else:
+                print(' Código de produto inválido')
+                time.sleep(3)
+                os.system('cls')
+            
         elif opcao == "3":
-            print("Opção selecionada: Mostrar carrinho \n")
+            os.system('cls')
+            print("\n Opção selecionada: Mostrar carrinho \n")
 
         elif opcao == "4":
-            print("Opção selecionada: Pagar conta \n")
+            os.system('cls')
+            print("\n Opção selecionada: Pagar conta \n")
 
             #Confirmação de compra
-            cpf=input("Digite  o cpf: ")
+            cpf=input("\n Digite  o cpf: ")
             if cpf in cliente_cpf:
                 
-                senha = input("Digite  a senha: ")
+                senha = input("\n Digite  a senha: ")
                 if senha in cliente_senha:
-                    print ("Pagamento efutado com sucesso! \n")
+                    print ("\n Pagamento efutado com sucesso! \n")
                     cliente_limitecredito.clear()
                     
                 else:
-                        print ("Senha incorreta. \n")
+                        print ("\n Senha incorreta. \n")
 
             #Verificação de CPF
             if not cpf in cliente_cpf:
-                    print("CPF incorreto.")
+                    print("\n CPF incorreto.")
 
         elif opcao == "5":
-            print("Opção selecionada: Consultar cliente \n")            
-            #consulta_cliente()
+            os.system('cls')
+            print("\n Opção selecionada: Consultar cliente \n")            
+            procurarcliente = input('Digite o cpf do cliente a ser procurado: ')
+        
+            if procurarcliente in cliente_cpf:
+                print('\n Cliente foi encontrado!')
+                print(cliente_username)
+            else:
+                print('\n O cliente nao foi encontrado. Verifique o CPF!')
+                
 
         elif opcao == "6":
-            print("Opção selecionada: Mostrar produtos na prateleira \n")            
-            #print (type(produtos_total))
+            os.system('cls')
+            print("\n Opção selecionada: Mostrar produtos \n")  
+            print(''' Lista de produtos disponíveis:\n
+ 1 - Pasta de Dente --- R$ 5,00
+ 2 - Arroz 5kg -------- R$ 10,00
+ 3 - Feijão 1kg ------- R$ 4,00
+ 4 - Açucar 1kg ------- R$ 2,00
+            ''')            
+            print('\n')
+            input('Pressione enter para retornar ao MENU...')
+            os.system('cls')
 
         elif opcao == "0":
-            print("Bye...")
+            os.system('cls')
+            print("Fechando programa...Obrigado!")
+            time.sleep(3)
             
         else:
-            print("Opção inválida! Tente novamente. \n")
+            print("\n Opção inválida! Tente novamente. \n")
 
 menu()

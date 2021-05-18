@@ -3,9 +3,9 @@ import time
 
 index = 0
 #CADASTRO DE CLIENTES
-cliente_username = []
-cliente_cpf = []
-cliente_senha = []
+cliente_username = ["marquinhos"]
+cliente_cpf = ["123"]
+cliente_senha = ["123"]
 cliente_email = [] 
 cliente_limitecredito = []
 
@@ -14,7 +14,12 @@ produtos_carrinho = []
 produtos_total = [{'Pasta de dente': '500.00'}, {'Arroz 5 kg': '100.00'}, {'Feijão 1 kg': '500.00'}, {'Açucar 1 kg': '50.00'}]
 produtos_nome = ['Pasta de dente', 'Arroz 5 kg', 'Feijão 1 kg', 'Açucar 1 kg']
 produtos_preco = [5.00, 10.00, 4.00, 2.00]
-
+printscreen = (''' Lista de produtos disponíveis:\n
+ 1 - Pasta de Dente --- R$ 5,00
+ 2 - Arroz 5kg -------- R$ 10,00
+ 3 - Feijão 1kg ------- R$ 4,00
+ 4 - Açucar 1kg ------- R$ 2,00
+            ''')
 
 total_carrinho = []
 
@@ -41,12 +46,20 @@ def cpf_validate(numbers):
             return False
     return True
 
+#def login():
+   # cpf=input("\n Digite  o cpf: ")
+    #if cpf in cliente_cpf:
+       # senha = input("\n Digite  a senha: ")
+        #if senha in cliente_senha:
+    #else
+        #print("Senha incorreta")
+       # time.sleep(1)
+       # os.system('cls')
+
 def cadastro (cpf):
     #Caso o cliente não esteja cadastrado solicita os dados e armazena
     if not cpf in cliente_cpf:
         cliente_cpf.append(cpf)
-        time.sleep(3)
-        os.system('cls')
         nome = input("\n Digite seu Nome: ")
         cliente_username.append(nome)
 
@@ -75,7 +88,6 @@ def cadastro (cpf):
         
 #Verificando o parametro senhas
 
-
 def menu():
     opcao = "-1"
 
@@ -99,29 +111,35 @@ def menu():
             if cpf_validate(cpf):
                 print('\n CPF válido.')
                 cadastro(cpf)
-                time.sleep(3)
+                time.sleep(1)
                 os.system('cls')
             else:
                 print('\n CPF inválido.')
-                time.sleep(3)
+                time.sleep(1)
                 os.system('cls')
                 
         elif opcao == "2":
             os.system('cls')
             print("\n Opção selecionada: Comprar \n")
-            print(''' Lista de produtos disponíveis:\n
- 1 - Pasta de Dente --- R$ 5,00
- 2 - Arroz 5kg -------- R$ 10,00
- 3 - Feijão 1kg ------- R$ 4,00
- 4 - Açucar 1kg ------- R$ 2,00
-            ''')
-            listacompra = int(input('\n Digite o número do produto desejado: '))
-            if listacompra > 0 and listacompra <=4:
-                print("teste")
+            cpf=input("\n Digite  o cpf: ")
+            if cpf in cliente_cpf:
+                senha = input("\n Digite  a senha: ")
+                if senha in cliente_senha:
+                    print(printscreen)
+                else:
+                    print("Senha incorreta")
+                    time.sleep(1)
+                    os.system('cls')
+                    
+                listacompra = int(input('\n Digite o número do produto desejado: '))
+                if listacompra > 0 and listacompra <=4:
+                    if opcao == "1":
+                        print ()
+
                 
             else:
-                print(' Código de produto inválido')
-                time.sleep(3)
+                print("CPF INVALIDO")
+                time.sleep(1)
                 os.system('cls')
             
         elif opcao == "3":
@@ -163,12 +181,7 @@ def menu():
         elif opcao == "6":
             os.system('cls')
             print("\n Opção selecionada: Mostrar produtos \n")  
-            print(''' Lista de produtos disponíveis:\n
- 1 - Pasta de Dente --- R$ 5,00
- 2 - Arroz 5kg -------- R$ 10,00
- 3 - Feijão 1kg ------- R$ 4,00
- 4 - Açucar 1kg ------- R$ 2,00
-            ''')            
+            print(printscreen)            
             print('\n')
             input('Pressione enter para retornar ao MENU...')
             os.system('cls')
@@ -176,7 +189,7 @@ def menu():
         elif opcao == "0":
             os.system('cls')
             print("Fechando programa...Obrigado!")
-            time.sleep(3)
+            time.sleep(2)
             
         else:
             print("\n Opção inválida! Tente novamente. \n")

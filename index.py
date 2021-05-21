@@ -1,4 +1,5 @@
 import os
+from sys import breakpointhook
 import time
 
 index = 0
@@ -6,23 +7,25 @@ index = 0
 cliente_username = ["marquinhos"]
 cliente_cpf = ["123"]
 cliente_senha = ["123"]
-cliente_email = [] 
-cliente_limitecredito = []
+cliente_email = ["mark@hotmail.com"] 
+cliente_limitecredito = ["1000"]
 
 # Lista de produtos
 produtos_carrinho = []
-produtos_total = [{'Pasta de dente': '500.00'}, {'Arroz 5 kg': '100.00'}, {'Feijão 1 kg': '500.00'}, {'Açucar 1 kg': '50.00'}]
-produtos_nome = ['Pasta de dente', 'Arroz 5 kg', 'Feijão 1 kg', 'Açucar 1 kg']
-produtos_preco = [5.00, 10.00, 4.00, 2.00]
+escolha1 = ["Pasta de Dente R$ 500,00"]
+escolha2 = ["Arroz 5kg R$ 100,00"]
+escolha3 = ["Feijão 1kg R$ 400,00"]
+escolha4 = ["Açucar 1kg R$ 200,00"]
+produtos_total = [['Pasta de dente', '500.00'], ['Arroz 5 kg', '100.00'], ['Feijão 1 kg', '500.00'], ['Açucar 1 kg', '50.00']]
+#produtos_nome = ['Pasta de dente', 'Arroz 5 kg', 'Feijão 1 kg', 'Açucar 1 kg']
+#produtos_preco = [5.00, 10.00, 4.00, 2.00]
 printscreen = (''' Lista de produtos disponíveis:\n
- 1 - Pasta de Dente --- R$ 5,00
- 2 - Arroz 5kg -------- R$ 10,00
- 3 - Feijão 1kg ------- R$ 4,00
- 4 - Açucar 1kg ------- R$ 2,00
+ 1 - Pasta de Dente --- R$ 500,00
+ 2 - Arroz 5kg -------- R$ 100,00
+ 3 - Feijão 1kg ------- R$ 400,00
+ 4 - Açucar 1kg ------- R$ 200,00
+ 0 - Sair
             ''')
-
-total_carrinho = []
-
 
 def cpf_validate(numbers):
     #  Obtém os números do CPF e ignora outros caracteres
@@ -65,7 +68,7 @@ def cadastro (cpf):
 
         #inicia uma verificação de senha de 6 digitos
         while True:
-            senha = input("\n Digite sua senha: ")
+            senha = input("\n Digite sua senha de 6 dígitos: ")
             tamanho_senha = len(list(senha))
             if tamanho_senha == 6:
                 cliente_senha.append(senha)
@@ -85,7 +88,64 @@ def cadastro (cpf):
         for cpf in cliente_cpf:
             print("\n Cliente já cadastrado com o nome de: ", cliente_username)
         return True
+
+def compras():
+    print(printscreen)
+    escolha=-1
+    credtotal = 1000
+    
+    while escolha !="0":
+
+        print("\n Seu Saldo atual é igual a: ", credtotal)
+        escolha=input("\n Escolha uma opção: ")
+        if escolha == "0":
+            escolha = input("\n Deseja encerrar a compra? 0 =  Sim,  1 - Não")
+            time.sleep(3)
+            cliente_limitecredito.append(credtotal)
+            os.system('cls')
+
+        if escolha == "1":
+            print("\n Adicionando produto a sacola...")
+            time.sleep(2)
+            print("\n Produto adicionado com sucesso!!")
+            credtotal = credtotal - 500
+            produtos_carrinho.append(escolha1)
+            print(printscreen)
         
+
+        if escolha == "2":
+            print("\n Adicionando produto a sacola...")
+            time.sleep(2)
+            print("\n Produto adicionado com sucesso!!")
+            credtotal = credtotal - 100
+            produtos_carrinho.append(escolha2)
+            print(printscreen)
+        
+
+        if escolha == "3":
+            print("\n Adicionando produto a sacola...")
+            time.sleep(2)
+            print("\n Produto adicionado com sucesso!!")
+            credtotal = credtotal - 400
+            produtos_carrinho.append(escolha3)
+            print(printscreen)
+    
+
+        if escolha == "4":
+            print("\n Adicionando produto a sacola...")
+            time.sleep(2)
+            print("\n Produto adicionado com sucesso!!")
+            credtotal = credtotal - 500
+            produtos_carrinho.append(escolha4)
+            print(printscreen)
+            
+        
+        if credtotal <= 0:
+            print("\n Seu limite estourou...")
+            print("\n Pague sua fatura antes de voltar as compras. \n")
+            time.sleep(4)
+            break
+
 #Verificando o parametro senhas
 
 def menu():
@@ -106,7 +166,7 @@ def menu():
         if opcao == "1":
             os.system('cls')
             print("\n Opção selecionada: Cadastro \n")
-            cpf = input(" Digite seu CPF: ")
+            cpf = input("\n Digite seu CPF: ")
             #Verificar CPF se é valido ou não
             if cpf_validate(cpf):
                 print('\n CPF válido.')
@@ -125,26 +185,22 @@ def menu():
             if cpf in cliente_cpf:
                 senha = input("\n Digite  a senha: ")
                 if senha in cliente_senha:
-                    print(printscreen)
+                    print("\n Login efetuado com Sucesso!!! \n")
+                    compras()
                 else:
-                    print("Senha incorreta")
+                    print("\n Senha incorreta")
                     time.sleep(1)
                     os.system('cls')
-                    
-                listacompra = int(input('\n Digite o número do produto desejado: '))
-                if listacompra > 0 and listacompra <=4:
-                    if opcao == "1":
-                        print ()
-
                 
             else:
-                print("CPF INVALIDO")
+                print("\n CPF INVALIDO")
                 time.sleep(1)
                 os.system('cls')
             
         elif opcao == "3":
             os.system('cls')
             print("\n Opção selecionada: Mostrar carrinho \n")
+            print (produtos_carrinho)
 
         elif opcao == "4":
             os.system('cls')
@@ -158,7 +214,7 @@ def menu():
                 if senha in cliente_senha:
                     print ("\n Pagamento efutado com sucesso! \n")
                     cliente_limitecredito.clear()
-                    
+                    produtos_carrinho.clear()
                 else:
                         print ("\n Senha incorreta. \n")
 
@@ -169,14 +225,19 @@ def menu():
         elif opcao == "5":
             os.system('cls')
             print("\n Opção selecionada: Consultar cliente \n")            
-            procurarcliente = input('Digite o cpf do cliente a ser procurado: ')
+            procurarcliente = input("\n Digite o cpf do cliente a ser procurado: ")
+            print("\n \n \n Buscando cliente....Aguarde \n \n \n")
+            time.sleep(5)
         
             if procurarcliente in cliente_cpf:
                 print('\n Cliente foi encontrado!')
                 print(cliente_username)
+                time.sleep(2)
+                os.system('cls')
             else:
                 print('\n O cliente nao foi encontrado. Verifique o CPF!')
-                
+                time.sleep(2)
+                os.system('cls')
 
         elif opcao == "6":
             os.system('cls')
@@ -187,11 +248,13 @@ def menu():
             os.system('cls')
 
         elif opcao == "0":
-            os.system('cls')
-            print("Fechando programa...Obrigado!")
+            print("\n \n \n Fechando programa...Obrigado!")
             time.sleep(2)
+            os.system('cls')
             
         else:
             print("\n Opção inválida! Tente novamente. \n")
+            time.sleep(2)
+            os.system('cls')
 
 menu()

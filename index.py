@@ -99,11 +99,16 @@ def compras():
         print("\n Seu Saldo atual é igual a: ", credtotal)
         escolha=input("\n Escolha uma opção: ")
         if escolha == "0":
-            escolha = input("\n Deseja encerrar a compra? 0 =  Sim,  1 - Não \n")
-            time.sleep(3)
-            cliente_limitecredito.append(credtotal)
-            os.system('cls')
-
+            escolha = input("\n Deseja encerrar a compra? S =  Sim,  N - Não \n")
+            if escolha == "S":
+                time.sleep(3)
+                cliente_limitecredito.append(credtotal)
+                os.system('cls')
+                break
+            else:
+                if escolha == "N":
+                    print("Boas compras, continue comprando...")
+            
         if escolha == "1":
             print("\n Adicionando produto a sacola...")
             time.sleep(2)

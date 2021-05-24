@@ -99,7 +99,7 @@ def compras():
         print("\n Seu Saldo atual é igual a: ", credtotal)
         escolha=input("\n Escolha uma opção: ")
         if escolha == "0":
-            escolha = input("\n Deseja encerrar a compra? 0 =  Sim,  1 - Não")
+            escolha = input("\n Deseja encerrar a compra? 0 =  Sim,  1 - Não \n")
             time.sleep(3)
             cliente_limitecredito.append(credtotal)
             os.system('cls')
@@ -200,7 +200,22 @@ def menu():
         elif opcao == "3":
             os.system('cls')
             print("\n Opção selecionada: Mostrar carrinho \n")
-            print (produtos_carrinho)
+            cpf=input("\n Digite  o cpf: ")
+            if cpf in cliente_cpf:
+                senha = input("\n Digite  a senha: ")
+                if senha in cliente_senha:
+                    print("\n Login efetuado com Sucesso!!! \n")
+                    print(produtos_carrinho)
+                else:
+                    print("\n Senha incorreta")
+                    time.sleep(1)
+                    os.system('cls')
+                
+            else:
+                print("\n CPF INVALIDO")
+                time.sleep(1)
+                os.system('cls')
+            
 
         elif opcao == "4":
             os.system('cls')
